@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Bombas — Consulta de Notas Fiscais</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <img src="assets/logo-top-bombas.png" alt="Top Bombas" class="brand-logo">
+      <h1 class="sr-only">Top Bombas</h1>
+    </div>
+    <span class="subtitle">Consulta de notas fiscais e confirmação de entrega</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- Tela: lista de notas fiscais -->
+  <section id="listView" class="view active">
+    <div class="summary-row" id="summaryRow"></div>
+
+    <div class="controls-row">
+      <input type="text" id="searchInput" placeholder="Buscar por nome da empresa…" autocomplete="off">
+      <select id="sortSelect">
+        <option value="date-desc">Mais recentes</option>
+        <option value="date-asc">Mais antigas</option>
+        <option value="value-desc">Maior valor</option>
+        <option value="value-asc">Menor valor</option>
+      </select>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button class="filter-chip active" data-filter="todas">Todas</button>
+      <button class="filter-chip" data-filter="pendente">Pendentes</button>
+      <button class="filter-chip" data-filter="entregue">Entregues</button>
+    </div>
+
+    <div class="search-meta" id="resultCount"></div>
+    <div class="record-list" id="recordList"></div>
+  </section>
+
+  <!-- Tela: documento / canhoto individual -->
+  <section id="docView" class="view">
+    <div class="doc-toolbar">
+      <button class="doc-back" id="backBtn">&larr; Voltar para a lista</button>
+      <button class="btn btn-ghost" id="printBtn">Imprimir / exportar PDF</button>
+    </div>
+
+    <div class="doc-sheet" id="docSheet">
+      <div class="doc-header">
+        <div>
+          <div class="doc-header-title">Nota fiscal / canhoto de entrega</div>
+          <div class="doc-nf" id="docNf">—</div>
+        </div>
+        <span class="doc-status" id="docStatus">—</span>
+      </div>
+
+      <div class="doc-body">
+        <div class="doc-row">
+          <span class="doc-label">Empresa</span>
+          <span class="doc-value" id="docCompany">—</span>
+        </div>
+        <div class="doc-row">
+          <span class="doc-label">Data</span>
+          <span class="doc-value" id="docDate">—</span>
+        </div>
+        <div class="doc-row">
+          <span class="doc-label">Valor</span>
+          <span class="doc-value" id="docValue">—</span>
+        </div>
+        <div class="doc-row">
+          <span class="doc-label">Itens</span>
+          <span class="doc-value" id="docItems">—</span>
+        </div>
+      </div>
+
+      <div class="doc-confirmed-stamp" id="confirmedStamp" style="display:none;"></div>
+
+      <div class="sign-section" id="signSection">
+        <div class="sign-section-title">Assinatura do cliente</div>
+
+        <div class="sign-pad-wrap">
+          <canvas id="sigCanvas"></canvas>
+          <div class="sign-line-hint"></div>
+        </div>
+        <p class="sign-caption">Assine com o mouse ou o dedo no campo acima</p>
+
+        <div class="sign-actions">
+          <button class="link-btn" id="clearSig">Limpar assinatura</button>
+        </div>
+
+        <div class="gps-line">
+          <span class="gps-dot"></span>
+          <span id="gpsText">Obtendo localização…</span>
+        </div>
+
+        <div class="doc-actions">
+          <button class="btn btn-primary" id="confirmSign">Confirmar entrega</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  protótipo — dados fictícios para fins de demonstração
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
